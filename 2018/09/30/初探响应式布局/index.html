@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;github：https://github.com/GEPANG/responsive &amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;光阴似箭，不知不觉，暑假已经收假一个月了。在这段时间里我继续跟进关于前端小知识———响应式布　　局。&amp;ensp;&amp;ensp;&amp;ens">
+<meta name="keywords" content="响应式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探响应式布局">
+<meta property="og:url" content="http://yoursite.com/2018/09/30/初探响应式布局/index.html">
+<meta property="og:site_name" content="仰望星空">
+<meta property="og:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;github：https://github.com/GEPANG/responsive &amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;光阴似箭，不知不觉，暑假已经收假一个月了。在这段时间里我继续跟进关于前端小知识———响应式布　　局。&amp;ensp;&amp;ensp;&amp;ens">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/GEPANG/responsive/blob/master/resp/img/head.png?raw=true">
+<meta property="og:image" content="https://github.com/GEPANG/responsive/blob/master/resp/img/footer.png?raw=true">
+<meta property="og:image" content="https://github.com/GEPANG/responsive/blob/master/resp/img/head-75em.png?raw=true">
+<meta property="og:image" content="https://github.com/GEPANG/responsive/blob/master/resp/img/head-50em.png?raw=true">
+<meta property="og:image" content="https://github.com/GEPANG/responsive/blob/master/resp/img/head-30em.png?raw=true">
+<meta property="og:updated_time" content="2019-04-12T15:31:28.706Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初探响应式布局">
+<meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;github：https://github.com/GEPANG/responsive &amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;光阴似箭，不知不觉，暑假已经收假一个月了。在这段时间里我继续跟进关于前端小知识———响应式布　　局。&amp;ensp;&amp;ensp;&amp;ens">
+<meta name="twitter:image" content="https://github.com/GEPANG/responsive/blob/master/resp/img/head.png?raw=true">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/30/初探响应式布局/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>初探响应式布局 | 仰望星空</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">仰望星空</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/30/初探响应式布局/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="日月星辰">
+      <meta itemprop="description" content="A good beginning is half done">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="仰望星空">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">初探响应式布局
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-09-30 12:35:10" itemprop="dateCreated datePublished" datetime="2018-09-30T12:35:10+08:00">2018-09-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-12 23:31:28" itemprop="dateModified" datetime="2019-04-12T23:31:28+08:00">2019-04-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端小零件/" itemprop="url" rel="index"><span itemprop="name">前端小零件</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/30/初探响应式布局/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/30/初探响应式布局/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;github：<a href="https://github.com/GEPANG/responsive" target="_blank" rel="noopener">https://github.com/GEPANG/responsive</a></p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;光阴似箭，不知不觉，暑假已经收假一个月了。在这段时间里我继续跟进关于前端小知识———响应式布<br>　　局。<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;响应式布局也就是能自适应屏幕，即在pc端，移动端都能够适应并且页面清楚。当然刚开写这个没有用到框<br>&ensp;&ensp;&ensp;架，是直接写的。在开始是以弹性为基础写的，但是弹性布局在较宽的屏幕和较窄的屏幕适应不好，因为弹性布<br>&ensp;&ensp;&ensp;局的优化是有限的。所有后面就提出了向响应式发展的理念——也就是给不同的设备做不同设计。在不同层面来<br>&ensp;&ensp;&ensp;处理，这里的不同层面来处理也就是响应式网站设计，这时候就引入了媒体查询也叫媒介查询(media query)，<br>&ensp;&ensp;&ensp;这个概念在css2.1就开始有了，在css3以后这个媒体查询的概念就越来越被强化了。了解更多请往下看……<br><a id="more"></a><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<strong>媒体查询</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;css2的媒体查询<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel = &quot;stylesheet&quot; type = &quot;text/css&quot; href = &quot;print.css&quot; media = &quot;print&quot;/&gt;</span><br><span class="line">&lt;link rel = &quot;stylesheet&quot; type = &quot;text/css&quot; href = &quot;site.css&quot; media = &quot;screen&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;css3媒体查询<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@media all and (min-width:800px)&#123; //min也可以是max</span><br><span class="line">     ...</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;这就是一个典型的媒体查询以@media开头，all表示媒体类型，也可以是screen和print，当然也可以不写<br>&ensp;&ensp;&ensp;&ensp;默认为all，<code>min-width:800px</code>表示最小宽度为800px；and表示逻辑操作的连接，也可以是only和not，or,当然<br>&ensp;&ensp;&ensp;&ensp;也可以是逗号，逗号和or一样，这些我就不详细说了。</p>
+<hr>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<strong>一个不如意的响应式布局</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;一、写静态网页</p>
+<p>&ensp;&ensp;&ensp;&ensp;在这部分也没有多少技巧，相信来写这个响应式的，对于写个静态网页应是没有问题的。</p>
+<p>&ensp;&ensp;&ensp;&ensp;看一下注意事项：</p>
+<ol>
+<li>需要用百分比来写这个网页，否则网页不会改变。</li>
+<li>页面重置(初始化)，html{font-size: 62.5%;color: #222;}；这部分代码是吧页面文字大小设置为10px即1rem<br>=10px<code>{(10/16)*100%}</code>。当html{font-size: 100%;color: #222;}是1rem=16px;</li>
+<li>单位使用，在相应式布局中一般都用到em和rem。为什么要用两个呢？原因是相应式要的是相对单位，因为<br>在写页面时，部分内容会随着页面宽度变化而发生改变。所以用em和rem这两个相对单位。<br>(1)、而相对单位em，既然是相对就会相对于谁也就是参照物，em的参照物为父元素的<code>font-size</code>的大小，具<br>有继承性，<code>1em=16px</code>；由于em随着父元素给写网页带来了许多不确定性，因此会容易导致混乱。<br>(2)、而相对单位rem。它基本是和em是一样的，但是其参照物为根元素html，相对有参考固定不变的值，这<br>样就好计算，不会混乱。因此一般都是用rem来写。</li>
+<li>图片宽度要设置为100%，这个在后面再讲解图片响应式。<br><br><br>&ensp;&ensp;&ensp;&ensp;看一下这张图片<br><img src="https://github.com/GEPANG/responsive/blob/master/resp/img/head.png?raw=true" alt="">&ensp;&ensp;&ensp;&ensp;这个图片里的文字部分可以用<code>float:left;</code>来让其展示，当然这也是人们最容易想到的方法。这里可以用<br><code>display:inline-block;</code>来让其展示。这里你们可以看到我这个是有点问题的，文字和图片太靠近了，当时没<br>有做好，这是第一张，有些技巧也没熟练掌握。<br>&ensp;&ensp;&ensp;&ensp;这里的文字对齐可以用<code>vertical-align: top</code>;这个它会以最高的那个为基准来对齐。<br><br><br>&ensp;&ensp;&ensp;&ensp;看一下页脚<br><img src="https://github.com/GEPANG/responsive/blob/master/resp/img/footer.png?raw=true" alt="">&ensp;&ensp;&ensp;&ensp;这部分也就是冒号前面的字体写法，这里可以用其标签来写，都能写的出来的，我在这里用的是伪元素来<br>写的看这部分代码：<code>footer .detail span:first-child::before{content: &quot;地址:  &quot;}</code>;其他都与其一样的写法。<br>这个是个很好的写法，这里的before表示之前，还有一个就是after也就是之后，这两个用的都比较多，也很<br>好用。<br><br><br>&ensp;&ensp;&ensp;&ensp;这部分也就这么多吧，都是些我觉的好的方法而已，其实没有这些相信你们都可以写出来这个静态网页，<br>只需用百分比写就行了。</li>
+</ol>
+<hr>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;二、写响应式</p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;静态的写网了，就开始写真正要做的事情了——响应式。<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;在开始讲过，响应式就是用媒体查询来写，来适应任何分辨率的屏幕。我在写响应式的时候，没有响应式<br>&ensp;&ensp;&ensp;&ensp;的psd图，都是以自己的想法来写这个响应式，以调整屏幕来写的。</p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;需要注意的：当在写这个<code>@media all and (min-width:50em){...}</code>;媒体查询的时候，在后面设置断点的单<br>&ensp;&ensp;&ensp;&ensp;位时不能写成rem，原因是——媒体查询的优先级特别高，它并不是html的一个子元素，而并不在html级别之<br>&ensp;&ensp;&ensp;&ensp;下，所以它不是html里<code>font-size</code>的设置而是浏览器的默认设置，因此可以看到这里写的50em即<code>50*16=800px</code>。<br><br><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;看一下这段代码:</p>
+<pre><code>&ensp;&ensp;&ensp;&ensp;@media only screen and (max-width:75em){
+&ensp;&ensp;&ensp;&ensp;    header .menu .one .first:nth-child(4),
+&ensp;&ensp;&ensp;&ensp;    header .menu .one .first:nth-child(6)
+&ensp;&ensp;&ensp;&ensp;{
+&ensp;&ensp;&ensp;&ensp;    display: none;
+&ensp;&ensp;&ensp;&ensp;}
+&ensp;&ensp;&ensp;&ensp;    header .menu .one{
+&ensp;&ensp;&ensp;&ensp;    font-size: 1.5rem;
+&ensp;&ensp;&ensp;&ensp;}
+&ensp;&ensp;&ensp;&ensp;
+&ensp;&ensp;&ensp;&ensp;@media only screen and (max-width:50em){
+&ensp;&ensp;&ensp;&ensp;    header .menu .one .first:nth-child(2),
+&ensp;&ensp;&ensp;&ensp;    header .menu .one .first:nth-child(3)
+&ensp;&ensp;&ensp;&ensp;{
+&ensp;&ensp;&ensp;&ensp;        display: none;
+&ensp;&ensp;&ensp;&ensp;}
+&ensp;&ensp;&ensp;&ensp;    header .menu .one{
+&ensp;&ensp;&ensp;&ensp;        font-size:1.2rem;
+&ensp;&ensp;&ensp;&ensp;    }
+&ensp;&ensp;&ensp;&ensp;}
+&ensp;&ensp;&ensp;&ensp;@media only screen and (max-width:30em){
+&ensp;&ensp;&ensp;&ensp;    .article .our{
+&ensp;&ensp;&ensp;&ensp;        margin-bottom: 2rem;
+&ensp;&ensp;&ensp;&ensp;    }
+&ensp;&ensp;&ensp;&ensp;    header .menu .one{
+&ensp;&ensp;&ensp;&ensp;        font-size:1rem;
+&ensp;&ensp;&ensp;&ensp;    }
+&ensp;&ensp;&ensp;&ensp;}
+</code></pre>
+
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;上面这一小段代码是我网页头部的响应式，没上面技巧吧，也就是平时写静态网页的方法。为了能适应屏<br>&ensp;&ensp;&ensp;&ensp;幕需要把头部的一些<code>li</code>去掉,当然在你去掉的时候要选择一些不那么主要的删除。<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;在这里用到了结构伪类选择器的nth-child()；表示选择第几个li，当在两个li中间还有其它标签的时候，同<br>&ensp;&ensp;&ensp;&ensp;样要计算里面。若要选择同类型且不计算不同的标签则可以用nth-of-type(),表示只选择同类型的标签，当在两<br>&ensp;&ensp;&ensp;&ensp;个相同标签之间有不同标签时不计算。</p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;看一下头部响应式的效果<br><img src="https://github.com/GEPANG/responsive/blob/master/resp/img/head-75em.png?raw=true" alt=""><br><img src="https://github.com/GEPANG/responsive/blob/master/resp/img/head-50em.png?raw=true" alt=""><br><img src="https://github.com/GEPANG/responsive/blob/master/resp/img/head-30em.png?raw=true" alt=""></p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;以上三张图片是响应式的的三部分，第三和第二张差不多，因为在变到30em时基本没有多大变化，所以<br>&ensp;&ensp;&ensp;&ensp;没有多大改变，也就改变了字体大小。</p>
+<hr>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;响应式图片<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;图片在响应式里面也是一个大问题，大图片在加载上回很慢，很费流量，而小图片虽然加载速度快但是在<br>&ensp;&ensp;&ensp;&ensp;放大后就会出现模糊，因此就有了响应式图片。响应式图片不仅仅是图片的排版和布局，更多的根据设备大小<br>&ensp;&ensp;&ensp;&ensp;加载不同的图片<br><br><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;几种实现响应式图片的方式</p>
+<p><pre><code><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;1. js或服务端<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2. srcset<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;3. srcset配合sizes<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;4. picture<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;5. svg</code></pre><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;srcset：<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;srcset是img标签里的一个属性，看这段代码<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>&lt;img  src=&quot;./img/photo2.png&quot; srcset = &quot;img/480.png 480w, img/800.png 800w,img/1600.png 1600w&quot;&gt;</code><br>&ensp;&ensp;&ensp;&ensp;上面写的图片是一样的，只是大小不一样。添加srcset之后图片会随着屏幕的大小来选择合适的图片来显示，<br>&ensp;&ensp;&ensp;&ensp;在图片地址后面的…w表示图片的宽度。</p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;srcset配合sizes：<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>&lt;img  src=&quot;./img/photo2.png&quot; srcset = &quot;img/480.png 480w, img/800.png 800w,img/1600.png 1600w&quot;</code><br>&ensp;&ensp;&ensp;&ensp;<code>sizes=&quot;100vw&quot;&gt;</code><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;在上一个里没有写sizes属性，但是它其实还是被默认设置为<code>sizes=100vw</code>,这里的vw表示的就是视口的宽<br>&ensp;&ensp;&ensp;&ensp;度即<code>viewport</code>和<code>width</code>,而100表示的是百分比100％而不是一100个，设置成100vw就表示把图片设置成100%<br>&ensp;&ensp;&ensp;&ensp;的视口宽度。sizes属性就是告诉浏览器以什么样的尺寸来显示。</p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;picture:<br>&ensp;&ensp;&ensp;&ensp;<code>&lt;picture&gt;</code><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>&lt;source srcset = &quot;./img/ad002-l.png&quot;  media = &quot;(min-width:50em)&quot;&gt;</code><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>&lt;source srcset = &quot;./img/ad002-m.png&quot;  media = &quot;(min-width:30em)&quot;&gt;</code><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>&lt;img src=&quot;./img/ad003.png&quot; &gt;</code><br>&ensp;&ensp;&ensp;&ensp;<code>&lt;/picture&gt;</code><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;picture里包含任意个数的source元素和一个img。而每一个都可以给它设置media(媒体查询)。在这里浏览<br>&ensp;&ensp;&ensp;&ensp;器会遍历picture里面的suorce设置，直到找到一个属性满足当前环境的media，如果满足就把source里的srcset<br>&ensp;&ensp;&ensp;&ensp;匹配到img里面。也就是说我们可以给img匹配多组的srcset属性来匹配不同的媒体查询条件，不像前面那个只<br>&ensp;&ensp;&ensp;&ensp;能设置一组。</p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;svg：<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;svg是可缩放的矢量图形它是基于可扩展标记语言来生成的，它可以用任何的文本编辑器来创建，但是这会<br>&ensp;&ensp;&ensp;&ensp;非常麻烦。这里有个概念——矢量图形，什么是矢量图形？也就是这些图形在缩放的时候都不会失真和变形，这<br>&ensp;&ensp;&ensp;&ensp;些图形不是基于像素的，而是基于有个绘制的规则，比如说颜色，形状轮廓，大小等等，确定了这些规则，即使<br>&ensp;&ensp;&ensp;&ensp;我们发生缩放也不会影响图片的绘制，当然也就不会发生失真。<br><br><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;创建svg图片网站和查看兼容性：<br>&ensp;&ensp;&ensp;&ensp;1. <a href="https://icomoon.io/" target="_blank" rel="noopener">https://icomoon.io/</a><br>&ensp;&ensp;&ensp;&ensp;2. <a href="https://editor.method.ac/" target="_blank" rel="noopener">https://editor.method.ac/</a><br>&ensp;&ensp;&ensp;&ensp;3. <a href="https://caniuse.com/" target="_blank" rel="noopener">https://caniuse.com/</a>　（查看兼容性）<br><br><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;兼容性<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;在这里我只说写picture的兼容性，因为我只写了这个。一般在写picture时会使用一个polyfill，polyfill是<br>&ensp;&ensp;&ensp;&ensp;让浏览器能够兼容picture，它是一个脚本。而最有名的polyfill就是picture库。<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;picture库的地址：<a href="http://scottjehl.github.io/picturefill/" target="_blank" rel="noopener">http://scottjehl.github.io/picturefill/</a>，在写的时候直接下载picture库引入就可以了。</p>
+<hr>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;到这里这篇章也就结束了，讲完感觉也没什么东西<code>:)</code>,值得注意的也就是图片部分的学习，以及在写时的宽<br>&ensp;&ensp;&ensp;&ensp;度设置，在我的github里面有两张响应式设计。</p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;github：<a href="https://github.com/GEPANG/responsive" target="_blank" rel="noopener">https://github.com/GEPANG/responsive</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/响应式/" rel="tag"># 响应式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/14/图片放大镜/" rel="next" title="图片放大镜">
+                <i class="fa fa-chevron-left"></i> 图片放大镜
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/04/初识jQuery/" rel="prev" title="初识jQuery">
+                初识jQuery <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="日月星辰" />
+            
+              <p class="site-author-name" itemprop="name">日月星辰</p>
+              <p class="site-description motion-element" itemprop="description">A good beginning is half done</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/GEPANG" target="_blank" title="GitHub"><i class="fa fa-fw fa-github-square"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:2455124772@qq.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">日月星辰</span>
+
+  
+
+  
+</div>
+
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.3.0</div>
+
+
+
+-->
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '7VSJFQgfDT8XX0ydjR5iCowu-gzGzoHsz',
+        appKey: 'EJWE9Jv0oqhjO7xpnEhuIpbx',
+        placeholder: 'express your thoughts',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

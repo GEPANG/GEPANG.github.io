@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="上一次讲了，jQuery是什么?学习它需要具备那些知识基础?在这一个星期后我初步学习了jQuery的选择器,过　　滤器、、、这些都是css里的知识，jQuery只是提供了更简便的方式去实现，还为一些选择器专门提供了方法，看　　正题吧↓。">
+<meta name="keywords" content="jquery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery初步学习1">
+<meta property="og:url" content="http://yoursite.com/2019/04/12/jQuery初步学习1/index.html">
+<meta property="og:site_name" content="仰望星空">
+<meta property="og:description" content="上一次讲了，jQuery是什么?学习它需要具备那些知识基础?在这一个星期后我初步学习了jQuery的选择器,过　　滤器、、、这些都是css里的知识，jQuery只是提供了更简便的方式去实现，还为一些选择器专门提供了方法，看　　正题吧↓。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-31T10:33:27.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery初步学习1">
+<meta name="twitter:description" content="上一次讲了，jQuery是什么?学习它需要具备那些知识基础?在这一个星期后我初步学习了jQuery的选择器,过　　滤器、、、这些都是css里的知识，jQuery只是提供了更简便的方式去实现，还为一些选择器专门提供了方法，看　　正题吧↓。">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/12/jQuery初步学习1/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>jQuery初步学习1 | 仰望星空</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">仰望星空</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/12/jQuery初步学习1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="日月星辰">
+      <meta itemprop="description" content="A good beginning is half done">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="仰望星空">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">jQuery初步学习1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-12 23:20:29" itemprop="dateCreated datePublished" datetime="2019-04-12T23:20:29+08:00">2019-04-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-31 18:33:27" itemprop="dateModified" datetime="2019-05-31T18:33:27+08:00">2019-05-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript库/" itemprop="url" rel="index"><span itemprop="name">javascript库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/12/jQuery初步学习1/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/04/12/jQuery初步学习1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>　　　　上一次讲了，jQuery是什么?学习它需要具备那些知识基础?在这一个星期后我初步学习了jQuery的选择器,过<br>　　滤器、、、这些都是css里的知识，jQuery只是提供了更简便的方式去实现，还为一些选择器专门提供了方法，看<br>　　正题吧↓。<br><a id="more"></a></p>
+<p>　　　　一、jQuery加载<br>　　　　加载这种形式，是为了让页面能更快的显示出来，不论是javascript还是jQuery它们都有自己加载方式。<br>　　　　１.javascript的加载形式：<code>window.onload = function(){}</code>这种等待加载只加载一次,若有图片需要等到图片<br>　　加载完后才执行js代码，当有多个js要执行时前一个会被后面的覆,如：<br>　　<code>window.onload = function(){alet(&#39;1&#39;)};</code> <code>window.onload = function(){alert(&#39;2&#39;);}</code>这种情况只会返回2；<br>　　　　２.jQuery的加载形式：<code>$(document).ready(function(){})</code>,可以简写为：<code>$(functiong(){})</code>这种等待加载,是<br>　　加载多次,只需加载到第二个body就可以执行js代码，且当有多个js要执行时不会被覆盖会依次执行，代码就不放<br>　　了，知道这个加载形式就OK。</p>
+<p>　　　　二、js选择器的模式匹配<br>　　　　匹配模式有：=,^=,$=,|=,!=,~=,<em>=等<br>　　　　1.<code>$(&#39;a[title]&#39;).css(&#39;color&#39;,&#39;red&#39;);</code>选择所有a标签有title属性的，这种模式我没有写，就是在标签里有<br>　　tilte属性多的被选中;<br>　　　　２.<code>$(&#39;a[title = num]&#39;).css(&#39;background&#39;,&#39;yellow&#39;);</code>选择选择所有a标签有title=num的;这种只有当title里<br>　　只有一个命名时(有空格也不行),才会有用。<br>　　　　３.<code>$(&#39;a[title ^= num]&#39;).css(&#39;background&#39;,&#39;green&#39;);</code>选择选择所有a标签有<br>　　title开头等于num的;这种情况title只能有一个命名，也可以有多个命名,但是你选择title开头等于num的哪个命名<br>　　必须是title里的第一个命名，否则不显示;<br>　　　　４.<code>$(&#39;a[title $= num]&#39;).css(&#39;background&#39;,&#39;red&#39;);</code>结尾等于num的;这种情况title可以有多个命名,但你选<br>　　择title结尾等于num(包括等于)的哪个命名必须是title里的最后一个命名,否则不显示;<br>　　　　５.<code>$(&quot;a[title |= num]&quot;).css(&#39;background&#39;,&#39;gray&#39;);</code>等于这个属性值或在后面跟一个减号如(num-2,num-<br>　　1)形式;这种情况title只能有一个命名.也可以有多个命名,但你选择title开头等于num(或附带减号的)的哪个命名必<br>　　须是title里的第一个命名,否则不显示;<br>　　　　6.<code>$(&#39;a[title ~= num]&#39;).css(&#39;color&#39;,&#39;red&#39;);</code>表示以空格为列表的元素,如(aaa hhh);这种情况title可以有多<br>　　个命名,只要有num(必须等于)这个值时都会显示;<br>　　　　７.<code></code>$(‘a[title </em>= hai]’).css(‘color’,’blue’);<code></code>包含一定的子串的,如找有num,(numhf,lsnum,koenum)<br>　　这些都有num;这种情况title可以有多个命名,只要有num(是子串,等于也可以)这个值时都会显示;<br>　　　　８.<code>$(&#39;a[bbb][title = num]&#39;).css(&#39;color&#39;,&#39;red&#39;);</code>a[][]选定具有多个属性且属性值匹配成功;这种情况title<br>　　只能有一个命名,在里面不能有空格;bbb这个属性值可以有空格;</p>
+<p>　　　　三、常规选择器<br>　　　　在jQuery里大多数选择器都会有与之对应的方法，由于选择器太多我就写我知道和我学过的几个选择器吧。<br>　　　　１.群组选择器：可以直接选择包含在元素中的元素<br>　　　　写法：<code>$(&#39;.box,p&#39;).css(&#39;background&#39;,&#39;red&#39;);</code>两个类或者标签之间用逗号隔开。与之对应的方法是<code>find(&#39;p&#39;)</code>；<br>　　它的写法为：<code>$(&#39;.box&#39;).find(&#39;a&#39;).css(&#39;background&#39;,&#39;red&#39;);</code></p>
+<p>　　　　２.后代选择器：只要在当前选择元素的的里面<br>　　　　写法：<code>$(&#39;.box &gt; p&#39;).css(&#39;background&#39;,&#39;red&#39;);</code>两个类或者标签之间用大于符号分隔。在子元素a里面不能写了div<br>　　在写a否则不显示；与之对应的方法是<code>children(&#39;a&#39;)</code>；写法略…</p>
+<p>　　　　3.通配选择器:匹配所有的<br>　　　　写法：<code>$(&#39;.box ＊&#39;).css(&#39;background&#39;,&#39;red&#39;);</code>跟一个星号就可以了表示.box下的所有标签;</p>
+<p>　　　　４.兄弟选择器:也叫next选择器,只选择与之相邻的下一个;<br>　　　　写法：<code>$(&#39;.box　＋　p&#39;).css(&#39;background&#39;,&#39;red&#39;);</code>两个类或者标签之间用＋符号分隔；与之对应的方法是<br>　　<code>next(&#39;p&#39;)</code>；这种选择器还有一种是选择后面所有的p方式,写法：<code>$(&#39;.box ~ p&#39;).css(&#39;color&#39;,&#39;blue&#39;);</code>与之对应的方<br>　　法是<code>nextAll(&#39;p&#39;)</code>,这是选择后面的，还有选择前面一个和前面所有的的————前面一个的：<code>prev(&#39;p&#39;)</code>前面所有的：<br>　　<code>prevAll(&#39;p&#39;)</code>;</p>
+<p>　　　　５.多class选择器:通过多个类来选择元素<br>　　　　写法：<code>$(&#39;.box.pox&#39;).css(&#39;color&#39;,&#39;blue&#39;);</code>它没有对应的方法;</p>
+<p>　　　　６.其他方法<br>　　　　★<code>$(&#39;.box&#39;).siblings(&#39;p&#39;).css(&#39;color&#39;,&#39;blue&#39;);</code> <code>siblings(&#39;p&#39;)</code>方法：选择上下同级所有的p元素都会被选中;<br>　　　　★<code>$(&#39;.box&#39;).nextUntil(&#39;p&#39;).css(&#39;color&#39;,&#39;red&#39;);</code> <code>nextUntil(&#39;p&#39;)</code>方法：向下选中直到遇到p(同级)停止在.box<br>　　之后到p之前都会被选中;<br>　　　　★<code>$(&#39;.box&#39;).prevUntil(&#39;p&#39;).css(&#39;color&#39;,&#39;red&#39;);`</code>prevUntil();`方法:向上选中直到遇到p(同级)停止，在.box之前<br>　　到p之后都会被选中;</p>
+<p>　　　　四、过滤选择器<br>　　　　所谓过滤选择器就是通过伪类来选择元素如<code>:first，:last，:first-child，:last-child，only-child</code>等。<br>　　　　1.基本过滤选择器</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jquery/" rel="tag"># jquery</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/04/初识jQuery/" rel="next" title="初识jQuery">
+                <i class="fa fa-chevron-left"></i> 初识jQuery
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/31/Ajax表单提交/" rel="prev" title="Ajax表单提交">
+                Ajax表单提交 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="日月星辰" />
+            
+              <p class="site-author-name" itemprop="name">日月星辰</p>
+              <p class="site-description motion-element" itemprop="description">A good beginning is half done</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/GEPANG" target="_blank" title="GitHub"><i class="fa fa-fw fa-github-square"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:2455124772@qq.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">日月星辰</span>
+
+  
+
+  
+</div>
+
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.3.0</div>
+
+
+
+-->
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '7VSJFQgfDT8XX0ydjR5iCowu-gzGzoHsz',
+        appKey: 'EJWE9Jv0oqhjO7xpnEhuIpbx',
+        placeholder: 'express your thoughts',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
